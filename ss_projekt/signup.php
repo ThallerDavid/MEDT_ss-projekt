@@ -16,6 +16,7 @@
     <h1 style="margin-top: 1em;">SIGN UP</h1>
     <img id="logo2" src="img/logo.png">
     <div id="errorFlex">
+        <?php require('db.php') ?>
             <form action="createUserMySql.php" id="signupfeld" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post"> 
                 <input placeholder='Firstname' type="text" name="firstname"
                                 <?php if(isset($eingabe['firstname'])) echo 'value="'.$eingabe['firstname'].'"'; ?>><br>
@@ -33,12 +34,13 @@
                                 <?php if(isset($eingabe['passwort2']))echo 'value="'.$eingabe['passwort2'].'"'; ?>><br>
         
                     <input type="submit" name="senden" value="Absenden">
-                    <a style="font-size: 0.9em; color:#33383b" href="signinMySql.php">Already registered?</a>
+                    <a style="font-size: 0.9em; color:#33383b" href="auth_session.php">Already registered?</a>
             </form>
 </body>
 </html>
 
 <?php
+    require('db.php');
     if(isset($_POST['senden'])){ 
         $eingabe = [];
         $error = [];

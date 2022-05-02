@@ -35,40 +35,7 @@ if (isset($_SESSION['loggedin'])) {
 	";
 
     
-echo "
-<img id='logo2' src='img/logo.png'>
-<div id='company_margin'>
-    <a id='company' href=\"index.php?\" >
-        TODOC
-    </a>
-</div>
-
-<div id='nav'>
-        <a id='school' href=\"index.php?site=school\">
-            SCHOOL
-        </a>
-
-        <a id='work' href=\"index.php?site=work\">
-            WORK
-        </a>
-
-        <a id='shopping' href=\"index.php?site=shopping\">
-           SHOPPING
-        </a>
-
-        <a id='sport' href=\"index.php?site=sport\">
-            SPORT
-        </a>
-
-        <a  id='all' href=\"index.php?site=all\">
-            ALL
-        </a>
-
-        <div id='login'>
-            <a  id='signin' href=\"signinMySql.php\">
-                SIGN IN
-            </a>
-            <a id='signup' href=\"createUserMySql.php\">
+echo ">
                 SIGN UP
             </a>
         </div>

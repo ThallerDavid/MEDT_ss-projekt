@@ -1,26 +1,19 @@
 <?php
 
-  //MySQL database information
-  $_db_host = "localhost";
-  $_db_datenbank = "mydb";
-  $_db_username = "web";
-  $_db_passwort = "abcdefgh";
-
-  $conn = new mysqli($_db_host, $_db_username, $_db_passwort, $_db_datenbank);
-
+  require('db.php');
   if (isset($_REQUEST['firstname'])) {
     // removes backslashes
-    $_firstname = stripslashes($_REQUEST['firstname']);
+    $firstname = stripslashes($_REQUEST['firstname']);
     //escapes special characters in a string
-    $_firstname = mysqli_real_escape_string($con, $_firstname);
+    $firstname = mysqli_real_escape_string($conn, $firstname);
     $email    = stripslashes($_REQUEST['email']);
-    $email    = mysqli_real_escape_string($con, $email);
+    $email    = mysqli_real_escape_string($conn, $email);
     $password = stripslashes($_REQUEST['password']);
-    $password = mysqli_real_escape_string($con, $password);
+    $password = mysqli_real_escape_string($conn, $password);
     $create_datetime = date("Y-m-d H:i:s");
     $query    = "INSERT into `users` (firstname, password, email, create_datetime)
                  VALUES ('$firstname', '" . md5($password) . "', '$email', '$create_datetime')";
-    $result   = mysqli_query($con, $query);
+    $result   = mysqli_query($conn, $query);
     if ($result) {
         echo "<div class='form'>
               <h3>You are registered successfully.</h3><br/>
