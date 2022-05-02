@@ -7,9 +7,6 @@ $_db_passwort = "abcdefgh";
 
 $conn = new mysqli($_db_host, $_db_username, $_db_passwort, $_db_datenbank);
 
-// Check connection
-if (mysqli_errno()){
-    echo "Failed to connect to MySQL: " . mysqli_error();
-}
+
 
 ?>

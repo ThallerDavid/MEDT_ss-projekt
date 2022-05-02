@@ -1,11 +1,11 @@
-<?php 
+<?php
 session_start();
 // If the user is not logged in redirect to the login page...
 if (isset($_SESSION['loggedin'])) {
-	echo 'true';
-	exit;
+    echo 'true';
+    exit;
 }
- ?>
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,24 +18,57 @@ if (isset($_SESSION['loggedin'])) {
 </head>
 <body>
 
-<?php 
+<?php
 
- //echo 'hello' . $user_data['user_name']; 
-
-
-     $site = (isset($_GET['site'])) ? $_GET['site'] : "";
-
-	 if($site === ""){
-		 $site = "";
-	 }
+//echo 'hello' . $user_data['user_name'];
 
 
-	echo "
+$site = (isset($_GET['site'])) ? $_GET['site'] : "";
+
+if($site === ""){
+    $site = "";
+}
+
+
+echo "
 		<body id=\"$site\">
 	";
 
-    
-echo ">
+
+echo "
+<img id='logo2' src='img/logo.png'>
+<div id='company_margin'>
+    <a id='company' href=\"index.php?\" >
+        TODOC
+    </a>
+</div>
+
+<div id='nav'>
+        <a id='school' href=\"index.php?site=school\">
+            SCHOOL
+        </a>
+
+        <a id='work' href=\"index.php?site=work\">
+            WORK
+        </a>
+
+        <a id='shopping' href=\"index.php?site=shopping\">
+           SHOPPING
+        </a>
+
+        <a id='sport' href=\"index.php?site=sport\">
+            SPORT
+        </a>
+
+        <a  id='all' href=\"index.php?site=all\">
+            ALL
+        </a>
+
+        <div id='login'>
+            <a  id='signin' href=\"signin.php\">
+                SIGN IN
+            </a>
+            <a id='signup' href=\"createUserMySql.php\">
                 SIGN UP
             </a>
         </div>
@@ -65,13 +98,13 @@ $inputcategory = array();
 // }
 
 
-	if($site != "index"){
-	}
-	switch ($site) {
-		case 'school':
-		
+if($site != "index"){
+}
+switch ($site) {
+    case 'school':
+
         // if category === 'school'
-echo "   
+        echo "   
         <div id='content'>
             <h2 style='margin-left: 3%;'>SCHOOL</h2> 
             <div id='todo'>
@@ -90,11 +123,11 @@ echo "
                 <label for='done'>Done</label>
             </div>
         </div>";
-			break;
+        break;
 
-		case 'work':
-			# code...
-            echo "   
+    case 'work':
+        # code...
+        echo "   
             <div id='content'>
                 <h2 style='margin-left: 3%;'>WORK</h2> 
                 <div id='todo'>
@@ -113,11 +146,11 @@ echo "
                     <label for='done'>Done</label>
                 </div>
             </div>";
-			break;
+        break;
 
-		case 'shopping':
-			# code...
-            echo "   
+    case 'shopping':
+        # code...
+        echo "   
             <div id='content'>
                 <h2 style='margin-left: 3%;'>SHOPPING</h2> 
                 <div id='todo'>
@@ -136,11 +169,11 @@ echo "
                     <label for='done'>Done</label>
                 </div>
             </div>";
-			break;
+        break;
 
-		case 'sport':
-			# code...
-            echo "   
+    case 'sport':
+        # code...
+        echo "   
             <div id='content'>
                 <h2 style='margin-left: 3%;'>SPORT</h2> 
                 <div id='todo'>
@@ -159,11 +192,11 @@ echo "
                     <label for='done'>Done</label>
                 </div>
             </div>";
-			break;
-            
-        case 'all':
-            # code...
-            echo "   
+        break;
+
+    case 'all':
+        # code...
+        echo "   
             <div id='content'>
                 <h2 style='margin-left: 3%;'>ALL</h2> 
                 <div id='todo'>
@@ -182,45 +215,45 @@ echo "
                     <label for='done'>Done</label>
                 </div>
             </div>";
-            break;
-        
-        // case 'signin':
-        //     include 'signin.php';
-        //     echo '<div id="register">
-        //             <p>Not registered yet?</p>
-        //             <a href="signup.php">SIGNUP</a>
-        //           </div>';
-            
-        //     break;
+        break;
 
-        // case 'signup':
-        //      include 'signup.php';
-        //      echo '<div id="register">
-        //              <p>Already registered?</p>
-        //              <a href="signin.php">SIGNIN</a>
-        //             </div>';
-        //      break;    
+    // case 'signin':
+    //     include 'signin.php';
+    //     echo '<div id="register">
+    //             <p>Not registered yet?</p>
+    //             <a href="signup.php">SIGNUP</a>
+    //           </div>';
 
-		default:
-			include 'newtodo.php';
-			break;
-	}
+    //     break;
 
-    //submit
-    $category[0] = 'school';
-    $category[1] = 'work';
-    $category[2] = 'shopping';
-    $category[3] = 'sport';
-    $category[4] = 'all';
+    // case 'signup':
+    //      include 'signup.php';
+    //      echo '<div id="register">
+    //              <p>Already registered?</p>
+    //              <a href="signin.php">SIGNIN</a>
+    //             </div>';
+    //      break;
 
-  
-        
-    ?>
+    default:
+        include 'newtodo.php';
+        break;
+}
 
-    <?php 
-        include 'footer.php';
-    ?>
-    
+//submit
+$category[0] = 'school';
+$category[1] = 'work';
+$category[2] = 'shopping';
+$category[3] = 'sport';
+$category[4] = 'all';
+
+
+
+?>
+
+<?php
+include 'footer.php';
+?>
+
 
 </body>
 </html>

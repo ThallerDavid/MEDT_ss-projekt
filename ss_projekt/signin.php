@@ -8,6 +8,33 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<?php
+require('db.php');
+session_start();
+// When form submitted, check and create user session.
+if (isset($_POST['username'])) {
+    $email = stripslashes($_REQUEST['email']);
+    $email = mysqli_real_escape_string($conn, $email);
+    $password = stripslashes($_REQUEST['password']);
+    $password = mysqli_real_escape_string($conn, $password);
+    // Check user is exist in the database
+    $query    = "SELECT * FROM `user` WHERE $email='$email'
+                     AND password='" . md5($password) . "'";
+    $result = mysqli_query($conn, $query) or die(mysqli_error());
+    $rows = mysqli_num_rows($result);
+    if ($rows == 1) {
+        $_SESSION['username'] = $email;
+        // Redirect to user dashboard page
+        //header("Location: dashboard.php");
+    } else {
+        echo "<div class='form'>
+                  <h3>Incorrect Username/password.</h3><br/>
+                  <p class='link'>Click here to <a href='login.php'>Login</a> again.</p>
+                  </div>";
+    }
+} else {
+?>
+
 
 <div id="company_margin">
     <a id='company' href="index.php">
@@ -21,10 +48,14 @@
           method="post">
 
         <input placeholder='Email' type="text" name="email"
-            <?php if (isset($eingabe['mail'])) echo 'value="' . $eingabe['mail'] . '"'; ?>><br>
+         <?php
+         //if (isset($eingabe['mail'])) echo 'value="' . $eingabe['mail'] . '"';
+         ?>><br>
 
         <input placeholder="Password" type="password" name="password"
-            <?php if (isset($eingabe['passwort'])) echo 'value="' . $eingabe['passwort'] . '"'; ?>><br>
+            <?php
+            //if (isset($eingabe['passwort'])) echo 'value="' . $eingabe['passwort'] . '"';
+            ?>><br>
 
         <input type="submit" name="senden" value="Absenden">
         <a style="font-size: 0.9em; color:#33383b" href="createUserMySql.php">Not registered yet?</a>
@@ -33,42 +64,6 @@
 </html>
 
 <?php
-require('db.php');
-session_start();
-
-if (isset($_POST['senden'])) {
-    $eingabe = [];
-    $error = [];
 }
-
-if (isset($_POST['mail']) && strlen(trim($_POST['mail'])) > 4 && str_contains($_POST['mail'], '@') && !is_numeric($_POST['mail'])) {
-    $eingabe['mail'] = htmlspecialchars(trim($_POST['mail']));
-} else {
-    $error['mail'] = '<li><p>Email</p></li>';
-}
-
-if (isset($_POST['passwort']) && strlen(trim($_POST['passwort'])) > 6) {
-    $eingabe['passwort'] = htmlspecialchars(trim($_POST['passwort']));
-} else {
-    $error['passwort'] = '<li><p>Password </p></li>';
-}
-
-
-if (isset($_POST['senden'])) {
-    if (empty($error)) {
-
-        echo "<script type='text/javascript'>
-            document.getElementById('signupfeld').style='background-color: rgb(red, green, blue, 0)';
-            document.getElementById('signupfeld').innerHTML = '<h5>All inputs were okay!</h5> <a href=\"index.php?\">TODOC</a>  </div>';
-        </script>";
-        exit();
-
-    } else {
-        $errors = implode($error);
-        echo '<div class="error_output"><h4>Something went wrong:</h4><ul>' . $errors . '</ul></div></div>';
-    }
-}
-
-
 ?>
 
